@@ -39,6 +39,8 @@ public class SpringBootScalarAndEntityQueryExApplication {
 		for(FetchResult1 r1:list) {
 			System.out.println(r1.getResourceName()+" "+r1.getResourceExp());
 		}
+		
+		context.close();
 	}
 
 }
