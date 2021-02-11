@@ -1,6 +1,8 @@
 package in.neeraj.org;
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -35,10 +37,18 @@ public class SpringBootScalarAndEntityQueryExApplication {
 		
 		//FETCHING RECORDS USING PROJECTION CONCEPT
 		
-		List<FetchResult1> list = repo.findByResourceSkill("DEV",FetchResult1.class);
-		for(FetchResult1 r1:list) {
-			System.out.println(r1.getResourceName()+" "+r1.getResourceExp());
-		}
+//		List<FetchResult1> list = repo.findByResourceSkill("DEV",FetchResult1.class);
+//		for(FetchResult1 r1:list) {
+//			System.out.println(r1.getResourceName()+" "+r1.getResourceExp());
+//		}
+		
+		List<ResourceDtls> list1 = repo.findAll();
+		
+		List<Integer> resIds = list1.stream().
+				map(ResourceDtls::getResourceId).
+				collect(Collectors.toList());
+		
+		System.out.println(resIds);
 		
 		context.close();
 	}
